@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinFit: Get Financially Fit - VIT Bhopal Fintech Club</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colors */
+    --color-bg: hsl(220, 25%, 8%);
+    --color-fg: hsl(0, 0%, 98%);
+    --color-primary: hsl(158, 64%, 52%);
+    --color-primary-light: hsl(158, 70%, 60%);
+    --color-primary-dark: hsl(158, 64%, 35%);
+    --color-secondary: hsl(180, 60%, 50%);
+    --color-accent: hsl(270, 70%, 60%);
+    --color-muted: hsl(0, 0%, 65%);
+    --color-border: hsl(220, 15%, 25%);
+    --color-card: hsl(220, 20%, 12%);
+    
+    /* Spacing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, hsl(220, 25%, 8%), hsl(220, 20%, 12%));
+    background-attachment: fixed;
+    color: var(--color-fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(at 0% 0%, hsla(158, 64%, 52%, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(180, 60%, 50%, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(270, 70%, 60%, 0.15) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(158, 64%, 52%, 0.2) 0px, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    position: relative;
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-3xl) 0;
+}
+
+.decorative-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float 3s ease-in-out infinite;
+}
+
+.blob-1 {
+    top: 5rem;
+    right: 2.5rem;
+    width: 24rem;
+    height: 24rem;
+    background: hsla(158, 64%, 52%, 0.2);
+}
+
+.blob-2 {
+    bottom: 5rem;
+    left: 2.5rem;
+    width: 31.25rem;
+    height: 31.25rem;
+    background: hsla(180, 60%, 50%, 0.15);
+    animation-delay: 1s;
+}
+
+.blob-3 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 37.5rem;
+    height: 37.5rem;
+    background: hsla(270, 70%, 60%, 0.1);
+    animation-delay: 2s;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.hero-content {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.badge {
+    display: inline-block;
+    margin-bottom: var(--spacing-xl);
+}
+
+.badge span {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    color: var(--color-primary);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid hsla(158, 64%, 52%, 0.3);
+    box-shadow: 0 8px 32px hsla(220, 25%, 5%, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(52, 211, 153, 0.5));
+}
+
+.hero-description {
+    font-size: 1.125rem;
+    color: var(--color-muted);
+    max-width: 42rem;
+    margin-bottom: var(--spacing-xl);
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 32px hsla(220, 25%, 5%, 0.7);
+    border: 1px solid hsla(158, 64%, 52%, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    border-color: hsla(158, 64%, 52%, 0.4);
+    transform: translateY(-2px);
+}
+
+.info-card-primary { border-color: hsla(158, 64%, 52%, 0.2); }
+.info-card-secondary { border-color: hsla(180, 60%, 50%, 0.2); }
+.info-card-accent { border-color: hsla(270, 70%, 60%, 0.2); }
+
+.info-card-primary:hover { border-color: hsla(158, 64%, 52%, 0.4); }
+.info-card-secondary:hover { border-color: hsla(180, 60%, 50%, 0.4); }
+.info-card-accent:hover { border-color: hsla(270, 70%, 60%, 0.4); }
+
+.info-icon {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.info-card-primary .info-icon {
+    background: hsla(158, 64%, 52%, 0.2);
+    color: var(--color-primary);
+}
+
+.info-card-secondary .info-icon {
+    background: hsla(180, 60%, 50%, 0.2);
+    color: var(--color-secondary);
+}
+
+.info-card-accent .info-icon {
+    background: hsla(270, 70%, 60%, 0.2);
+    color: var(--color-accent);
+}
+
+.info-card:hover .info-icon {
+    background: hsla(158, 64%, 52%, 0.3);
+}
+
+.info-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+}
+
+.info-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-md);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 3rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-hero {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-bg);
+    box-shadow: 0 8px 32px hsla(220, 25%, 5%, 0.7);
+}
+
+.btn-hero:hover {
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    transform: scale(1.05);
+}
+
+.btn-hero svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-hero:hover svg {
+    transform: translateX(4px);
+}
+
+.btn-outline {
+    background: var(--color-bg);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Hero Image */
+.hero-image {
+    position: relative;
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    border: 1px solid hsla(158, 64%, 52%, 0.3);
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, hsla(220, 25%, 8%, 0.8), transparent);
+}
+
+.floating-stat {
+    position: absolute;
+    bottom: -1.5rem;
+    left: -1.5rem;
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    border: 1px solid hsla(158, 64%, 52%, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease-out 0.4s backwards;
+}
+
+.stat-number {
+    font-size: 1.875rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+}
+
+/* Details Section */
+.details-section {
+    padding: 5rem 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto var(--spacing-3xl);
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--color-muted);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.feature-card {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    border: 2px solid hsla(158, 64%, 52%, 0.2);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    border-color: hsla(158, 64%, 52%, 0.5);
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+    background: hsla(158, 64%, 52%, 0.1);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: hsla(158, 64%, 52%, 0.2);
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4);
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-description {
+    color: var(--color-muted);
+}
+
+/* Stats Card */
+.stats-card {
+    max-width: 64rem;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 1rem;
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItaDJ2LTJoLTJ6bTAgNGgtMnYyaDJ2LTJ6bTAgNGgtMnYyaDJ2LTJ6bTAtOGgtMnYyaDJ2LTJ6bS0yLTJoMnYtMmgtMnYyem0wLTRoMnYtMmgtMnYyem0wIDhoMnYtMmgtMnYyem0wIDRoMnYtMmgtMnYyeiIvPjwvZz48L2c+PC9zdmc+');
+    opacity: 0.3;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+}
+
+.stat-big {
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--color-bg);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    margin-bottom: 0.5rem;
+}
+
+.stat-text {
+    color: var(--color-bg);
+    opacity: 0.9;
+    font-size: 1.125rem;
+}
+
+/* Registration Section */
+.registration-section {
+    padding: 5rem 0;
+    position: relative;
+}
+
+.registration-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .registration-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.registration-info {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.registration-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+}
+
+.registration-description {
+    font-size: 1.125rem;
+    color: var(--color-muted);
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.benefit-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+/* Registration Card */
+.registration-card {
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.registration-card-inner {
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    border: 2px solid hsla(158, 64%, 52%, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4), 0 0 100px hsla(180, 60%, 50%, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.registration-card-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsla(158, 64%, 52%, 0.05), transparent, hsla(270, 70%, 60%, 0.05));
+    pointer-events: none;
+}
+
+.registration-icon {
+    display: inline-block;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 1rem;
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4);
+}
+
+.registration-icon svg {
+    display: block;
+    color: var(--color-bg);
+}
+
+.registration-card-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+}
+
+.registration-card-text {
+    color: var(--color-muted);
+    margin-bottom: var(--spacing-xl);
+}
+
+.registration-note {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.registration-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+}
+
+.pulse-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    border-top: 1px solid hsla(158, 64%, 52%, 0.2);
+    padding: 3rem 0;
+    position: relative;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.footer-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.footer-text {
+    color: var(--color-muted);
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+}
+
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.social-links a {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--color-card), hsl(220, 18%, 15%));
+    border: 1px solid hsla(158, 64%, 52%, 0.2);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-fg);
+    transition: all 0.4s ease;
+}
+
+.social-links a:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-color: var(--color-primary);
+    box-shadow: 0 0 60px hsla(158, 80%, 65%, 0.4);
+    transform: scale(1.1);
+    color: var(--color-bg);
+}
+
+.footer-address {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-top: var(--spacing-sm);
+}
+
+.footer-bottom {
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid hsla(158, 64%, 52%, 0.2);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .hero-section {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .floating-stat {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -3rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-card {
+        padding: 2rem var(--spacing-md);
+    }
+    
+    .registration-card-inner {
+        padding: 2rem;
+    }
+}</style>
+    <meta name="description" content="Join VIT Bhopal Fintech Club for FinFit event. Learn investment strategies, financial literacy, and wealth building from industry experts. Register now!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="decorative-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-grid">
+                <!-- Content -->
+                <div class="hero-content">
+                    <div class="badge">
+                        <span>VIT Bhopal Fintech Club</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        FinFit: Get<br>
+                        <span class="gradient-text">Financially Fit</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Join us for an engaging session on personal finance, investment strategies, and building wealth. 
+                        Learn from experts and take control of your financial future.
+                    </p>
+
+                    <!-- Quick Info Cards -->
+                    <div class="info-cards">
+                        <div class="info-card info-card-primary">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="info-label">Date</p>
+                                <p class="info-value">TBA</p>
+                            </div>
+                        </div>
+                        <div class="info-card info-card-secondary">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="info-label">Time</p>
+                                <p class="info-value">TBA</p>
+                            </div>
+                        </div>
+                        <div class="info-card info-card-accent">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="info-label">Venue</p>
+                                <p class="info-value">VIT Bhopal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="cta-buttons">
+                        <a href="https://forms.gle/uhPRgR6qWxrYXLQ59" class="btn btn-hero">
+                            Register Now
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#details" class="btn btn-outline">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="hero-image">
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop" alt="Financial growth and success illustration">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="floating-stat">
+                        <p class="stat-number">100+</p>
+                        <p class="stat-label">Students Expected</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section id="details" class="details-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What You'll Learn</h2>
+                <p class="section-description">
+                    This comprehensive session will equip you with essential financial knowledge and practical skills 
+                    to make informed decisions about your money.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Investment Fundamentals</h3>
+                    <p class="feature-description">Learn the basics of investing, portfolio diversification, and risk management strategies.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Expert Insights</h3>
+                    <p class="feature-description">Gain knowledge from experienced professionals in the fintech and investment industry.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Financial Literacy</h3>
+                    <p class="feature-description">Master essential financial concepts including budgeting, saving, and debt management.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Goal Setting</h3>
+                    <p class="feature-description">Discover how to set and achieve your financial goals with proven strategies and tools.</p>
+                </div>
+            </div>
+
+            <!-- Stats Card -->
+            <div class="stats-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <p class="stat-big">FREE</p>
+                        <p class="stat-text">Event Entry</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-big">2+</p>
+                        <p class="stat-text">Hours of Learning</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-big">Certificate</p>
+                        <p class="stat-text">of Participation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="registration-section">
+        <div class="container">
+            <div class="registration-grid">
+                <!-- Left: Info -->
+                <div class="registration-info">
+                    <h2 class="registration-title">
+                        Ready to Transform Your<br>
+                        <span class="gradient-text">Financial Future?</span>
+                    </h2>
+                    <p class="registration-description">
+                        Don't miss this opportunity to gain valuable financial knowledge and connect with 
+                        the fintech community at VIT Bhopal.
+                    </p>
+                    
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Free entry to the event</span>
+                        </div>
+                        <div class="benefit-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Learn from industry experts</span>
+                        </div>
+                        <div class="benefit-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Network with like-minded peers</span>
+                        </div>
+                        <div class="benefit-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Get a certificate of participation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Access to exclusive resources</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: CTA Card -->
+                <div class="registration-card">
+                    <div class="registration-card-inner">
+                        <div class="registration-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="registration-card-title">Secure Your Spot</h3>
+                        <p class="registration-card-text">
+                            Limited seats available. Register now to guarantee your participation.
+                        </p>
+
+                        <a href="https://forms.gle/uhPRgR6qWxrYXLQ59" class="btn btn-hero btn-full" target="_blank">
+                         Register Now
+                    </a>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                        
+                        <p class="registration-note">
+                            By registering, you'll receive event updates and exclusive resources from VIT Bhopal Fintech Club.
+                        </p>
+
+                        <div class="registration-status">
+                            <span class="pulse-dot"></span>
+                            Registration is online, Go Register Now!!!!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About -->
+                <div class="footer-section">
+                    <h3 class="footer-title">VIT Bhopal Fintech Club</h3>
+                    <p class="footer-text">
+                        Empowering students with financial literacy and fintech knowledge to build a better future.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#details">Event Details</a></li>
+                        <li><a href="#registration">Registration</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Social -->
+                <div class="footer-section">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="mailto:fintech@vitbhopal.ac.in" aria-label="Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="footer-address">
+                        VIT Bhopal University<br>
+                        Bhopal-Indore Highway, Kothrikalan<br>
+                        Sehore, Madhya Pradesh 466114
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> VIT Bhopal Fintech Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
